@@ -226,6 +226,7 @@ It is not a replacement for either — it is the layer in-between.
 
 Not published yet. The annotation model and test scenario API are designed; implementation is in progress. Watch the repo for updates.
 Planned: the testing library itself, a Kotlin implementation, and an AI-assisted IntelliJ plugin for boundary validation, side effect detection, and test scaffolding.
+
 ---
 
 ## License

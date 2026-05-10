@@ -207,17 +207,16 @@ No containers. No wiring. The boundary interfaces are the test surface.
 ---
 
 ## Where this fits
-
-|                                              | Unit tests                           | decote | E2E / integration             |
-|----------------------------------------------|--------------------------------------|--------|-------------------------------|
-| Tests implementation details                 | ✓ (except or class internal details) | —      | —                             |
-| No infrastructure                            | ✓                                    | ✓      | —                             |
-| Fast                                         | ✓                                    | ✓      | —                             |
-| Fully deterministic                          | — (often, yes, but not by design)    | ✓      | —                             |
-| Focus on business processes                  | —                                    | ✓      | ✓ (but with massive overload) |
-| Tests full service flow                      | —                                    | ✓      | ✓                             |
-| Tests real integration with external systems | —                                    | —      | ✓                             |
-
+|                                              | Unit tests                                           | decote                                   | E2E / integration                 |
+|----------------------------------------------|------------------------------------------------------|-------------------------------------------|-----------------------------------|
+| What is verified                             | Collaboration between implementation units           | Business process through the core         | System behavior with real systems |
+| Refactoring impact                           | High                                                 | Very low                                  | Very high                        |
+| No infrastructure                            | ✓                                                    | ✓                                         | —                                 |
+| Fast                                         | ✓                                                    | ✓                                         | —                                 |
+| Deterministic by design                      | —                                                    | ✓                                         | —                                 |
+| Focus on business processes                  | —                                                    | ✓                                         | ✓ (with heavy overhead)          |
+| Tests full service flow                      | —                                                    | ✓                                         | ✓                                 |
+| Tests real integration with external systems | —                                                    | —                                         | ✓                                 |
 decote fills the gap between unit tests and end-to-end tests.
 It is not a replacement for either — it is the layer in-between.
 

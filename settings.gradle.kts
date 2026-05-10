@@ -1,8 +1,9 @@
-rootProject.name = "purecore-toolkit"
+rootProject.name = "decote"
 
 include(
-    "purecore-annotations",
-    "purecore-standards",
-    "purecore-testing",
+    "decote-annotations",
+    "decote-standards",
+    "decote-testing",
+    "decote-standards-spring-boot-starter",
     "reference-app"
 )

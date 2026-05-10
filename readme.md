@@ -45,7 +45,7 @@ class CheckoutServiceTest {
 
 **Two annotations. That's the whole model.**
 
-- `@CoreEntry` — marks a service class as an entry point into the core. This is where a request, command or query enters.
+- `@CoreEntry` — marks a service class as an entry point into the core. This is where a request, command, or query enters.
 - `@CoreBoundary` — marks an interface as a boundary between the core and the outside world.
 
 The implementation of a boundary lives outside the core package. The core never imports it.
@@ -59,12 +59,69 @@ dependency.
 
 ## Step by step
 
-**1. Annotate your entry points**
+### Define what is your `Core`
 
-Service classes in Spring Boot are the natural entry points.
+The `Core` as that part of your service that is agnostic of the API and infrastructure.
+
+Usually it starts right behind the API, after the API layer has done a basic validation and mapped the request models
+to domain models. Those are specific services and methods that are called. Those are the `Entry Points` of the `Core`. 
+
+At some point the `Core` interacts with a database or external services. Here we are leaving the Core. Those are the
+`Boundaries` of the `Core`.
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                            API Layer                            │
+│                                                                 │
+│  - HTTP Controllers                                             │
+│  - Message Consumers                                            │
+│  - Basic validation                                             │
+│  - Mapping of API models to domain models                       │
+└────────────────────────────────┬────────────────────────────────┘
+                                 │
+                                 ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                              Core                               │
+│  ┌───────────────────────────────────────────────────────────┐  │
+│  │ EntryPoints                                               │  │
+│  │                                                           │  │
+│  │  - What are the ways to interact with your system,        │  │
+│  │    independent of HTTP, REST, etc.                        │  │
+│  │  - Start of deterministic execution                       │  │
+│  └───────────────────────────────────────────────────────────┘  │
+│  ┌───────────────────────────────────────────────────────────┐  │
+│  │ Business Logic                                            │  │
+│  │                                                           │  │
+│  │  - Pure decision-making                                   │  │
+│  │  - Applcation logic(orchestration, transaction handling)  │  │
+│  │  - Domain rules                                           │  │
+│  └───────────────────────────────────────────────────────────┘  │
+│  ┌───────────────────────────────────────────────────────────┐  │
+│  │ Boundaries                                                │  │
+│  │                                                           │  │
+│  │  - Interfaces to external world                           │  │
+│  └───────────────────────────────────────────────────────────┘  │
+└────────────────────────────────┬────────────────────────────────┘
+                                 │
+                                 ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                        Infrastructure Layer                     │
+│                                                                 │
+│  - Database (JPA, SQL, etc.)                                    │
+│  - External APIs (HTTP clients)                                 │
+│  - Messaging systems (Kafka, RabbitMQ, etc.)                    │
+│  - Time / randomness providers                                  │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+### 2. Annotate your `Entry Points`
+
+Mark the specific classes through which a client interacts with your service. 
 
 ```java
-@CoreEntry
+@CoreEntry  // <- this marks the class as an entry point
 @Service
 public class SalesService {
 
@@ -78,7 +135,8 @@ public class SalesService {
 }
 ```
 ---
-**2. Annotate your boundary interfaces**
+
+### 3. Annotate your boundary interfaces
 
 One interface per external system, inside the core package.
 
@@ -90,20 +148,27 @@ public interface EmailService {
 ```
 
 The implementation — the actual SMTP client, the JPA repository — lives outside. The core never sees it.
+
 ---
-**3. Root out hidden side effects**
+
+### 4. Root out hidden side effects
+
+To make the core deterministic, we need to replace all the left side effects with deterministic alternatives.
+(Ignore logging, tracing, and metrics for obvious reasons.)
 
 ```java
 // ✗  breaks determinism
-LocalDateTime now = LocalDateTime.now();
-String id = UUID.randomUUID().toString();
+var currentTime = LocalDateTime.now();
+var id = UUID.randomUUID().toString();
 
 // ✓  injected boundary — controllable in tests
-LocalDateTime now = timeService.getCurrentLocalDateTime();
-String uuid = randomService.createUuid();
+var currentTime = timeService.getCurrentLocalDateTime();
+var id = randomService.createUuid();
 ```
+
 ---
-**4. Write your tests**
+
+### 5. Write your tests
 
 ```java
 class CheckoutServiceTest {

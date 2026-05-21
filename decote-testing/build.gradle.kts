@@ -5,7 +5,7 @@ plugins {
 dependencies {
     api(project(":decote-annotations"))
 
-    testImplementation("org.junit.jupiter:junit-jupiter:6.0.3")
+    implementation("org.junit.jupiter:junit-jupiter:6.0.3")
 }
 
 tasks.test {

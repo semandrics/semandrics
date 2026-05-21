@@ -8,6 +8,7 @@ dependencies {
     implementation(project(":decote-annotations"))
     implementation(project(":decote-standards-spring-boot-starter"))
     implementation("org.springframework.boot:spring-boot-starter-web:4.0.6")
+
     testImplementation(project(":decote-testing"))
     testImplementation("org.springframework.boot:spring-boot-starter-test:4.0.6")
 }

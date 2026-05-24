@@ -21,5 +21,9 @@ tooling.
 
 ---
 
+More information on the website: [semandrics.github.io/semandrics](https://semandrics.github.io/semandrics)
+
+---
+
 License:
 [MIT](license.md)

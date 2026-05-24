@@ -1,9 +1,9 @@
-package io.github.decote.shop;
+package io.github.semandrics.shop;
 
-import io.github.decote.shop.sales.application.SalesService;
-import io.github.decote.shop.sales.domain.Order;
-import io.github.decote.shop.sales.domain.Result;
-import io.github.decote.testing.Scenario;
+import io.github.semandrics.shop.sales.application.SalesService;
+import io.github.semandrics.shop.sales.domain.Order;
+import io.github.semandrics.shop.sales.domain.Result;
+import io.github.semandrics.testing.Scenario;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

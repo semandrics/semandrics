@@ -1,7 +1,7 @@
-package io.github.decote.shop.sales.infrastructure;
+package io.github.semandrics.shop.sales.infrastructure;
 
-import io.github.decote.shop.sales.application.CartRepository;
-import io.github.decote.shop.sales.domain.Cart;
+import io.github.semandrics.shop.sales.application.CartRepository;
+import io.github.semandrics.shop.sales.domain.Cart;
 import org.springframework.stereotype.Repository;
 import java.util.Map;
 import java.util.Optional;

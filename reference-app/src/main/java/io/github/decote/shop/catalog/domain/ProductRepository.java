@@ -1,6 +1,6 @@
-package io.github.decote.shop.catalog.domain;
+package io.github.semandrics.shop.catalog.domain;
 
-import io.github.decote.CoreBoundary;
+import io.github.semandrics.CoreBoundary;
 
 import java.util.List;
 import java.util.Optional;

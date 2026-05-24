@@ -1,4 +1,4 @@
-package io.github.decote.shop.sales.domain;
+package io.github.semandrics.shop.sales.domain;
 
 public sealed interface Result<T> {
     record Ok<T>(T value) implements Result<T> {}

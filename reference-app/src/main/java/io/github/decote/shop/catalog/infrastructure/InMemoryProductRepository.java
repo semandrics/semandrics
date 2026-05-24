@@ -1,7 +1,7 @@
-package io.github.decote.shop.catalog.infrastructure;
+package io.github.semandrics.shop.catalog.infrastructure;
 
-import io.github.decote.shop.catalog.domain.Product;
-import io.github.decote.shop.catalog.domain.ProductRepository;
+import io.github.semandrics.shop.catalog.domain.Product;
+import io.github.semandrics.shop.catalog.domain.ProductRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;

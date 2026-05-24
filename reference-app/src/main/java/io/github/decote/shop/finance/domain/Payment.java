@@ -1,4 +1,4 @@
-package io.github.decote.shop.finance.domain;
+package io.github.semandrics.shop.finance.domain;
 
 import java.math.BigDecimal;
 import java.util.UUID;

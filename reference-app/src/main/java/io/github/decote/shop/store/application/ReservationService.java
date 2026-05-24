@@ -1,7 +1,7 @@
-package io.github.decote.shop.store.application;
+package io.github.semandrics.shop.store.application;
 
-import io.github.decote.shop.sales.domain.Result;
-import io.github.decote.shop.store.domain.ReservationResult;
+import io.github.semandrics.shop.sales.domain.Result;
+import io.github.semandrics.shop.store.domain.ReservationResult;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;

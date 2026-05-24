@@ -1,13 +1,13 @@
-package io.github.decote.shop.sales.application;
+package io.github.semandrics.shop.sales.application;
 
-import io.github.decote.CoreEntry;
-import io.github.decote.shop.catalog.application.CatalogueService;
-import io.github.decote.shop.finance.application.PaymentService;
-import io.github.decote.shop.sales.domain.Cart;
-import io.github.decote.shop.sales.domain.Order;
-import io.github.decote.shop.sales.domain.OrderFactory;
-import io.github.decote.shop.sales.domain.Result;
-import io.github.decote.shop.store.application.ReservationService;
+import io.github.semandrics.CoreEntry;
+import io.github.semandrics.shop.catalog.application.CatalogueService;
+import io.github.semandrics.shop.finance.application.PaymentService;
+import io.github.semandrics.shop.sales.domain.Cart;
+import io.github.semandrics.shop.sales.domain.Order;
+import io.github.semandrics.shop.sales.domain.OrderFactory;
+import io.github.semandrics.shop.sales.domain.Result;
+import io.github.semandrics.shop.store.application.ReservationService;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;

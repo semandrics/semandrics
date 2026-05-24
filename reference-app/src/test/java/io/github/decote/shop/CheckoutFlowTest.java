@@ -1,11 +1,11 @@
-package io.github.decote.shop;
+package io.github.semandrics.shop;
 
-import io.github.decote.shop.catalog.application.CatalogueService;
-import io.github.decote.shop.catalog.domain.Product;
-import io.github.decote.shop.sales.application.SalesService;
-import io.github.decote.shop.sales.domain.Cart;
-import io.github.decote.shop.sales.domain.Order;
-import io.github.decote.shop.sales.domain.Result;
+import io.github.semandrics.shop.catalog.application.CatalogueService;
+import io.github.semandrics.shop.catalog.domain.Product;
+import io.github.semandrics.shop.sales.application.SalesService;
+import io.github.semandrics.shop.sales.domain.Cart;
+import io.github.semandrics.shop.sales.domain.Order;
+import io.github.semandrics.shop.sales.domain.Result;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

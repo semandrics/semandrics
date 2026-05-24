@@ -1,4 +1,4 @@
-package io.github.decote.shop.catalog.api.product;
+package io.github.semandrics.shop.catalog.api.product;
 
 import java.math.BigDecimal;
 

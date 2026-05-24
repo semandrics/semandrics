@@ -1,8 +1,8 @@
-package io.github.decote.shop.finance.application;
+package io.github.semandrics.shop.finance.application;
 
-import io.github.decote.CoreBoundary;
-import io.github.decote.shop.finance.domain.Payment;
-import io.github.decote.shop.sales.domain.Result;
+import io.github.semandrics.CoreBoundary;
+import io.github.semandrics.shop.finance.domain.Payment;
+import io.github.semandrics.shop.sales.domain.Result;
 
 @CoreBoundary
 public interface PaymentProcessor {

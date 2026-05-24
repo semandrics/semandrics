@@ -1,6 +1,6 @@
-package io.github.decote.shop.finance.domain;
+package io.github.semandrics.shop.finance.domain;
 
-import io.github.decote.std.random.RandomService;
+import io.github.semandrics.std.random.RandomService;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;

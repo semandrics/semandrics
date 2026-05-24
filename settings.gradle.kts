@@ -1,9 +1,7 @@
-rootProject.name = "decote"
+rootProject.name = "semandrics"
 
 include(
-    "decote-annotations",
-    "decote-standards",
-    "decote-testing",
-    "decote-standards-spring-boot-starter",
+    "semandrics-annotations",
+    "semandrics-testing",
     "reference-app"
 )

@@ -1,6 +1,6 @@
-package io.github.decote.shop.sales.domain;
+package io.github.semandrics.shop.sales.domain;
 
-import io.github.decote.std.random.RandomService;
+import io.github.semandrics.std.random.RandomService;
 import org.springframework.stereotype.Service;
 
 @Service

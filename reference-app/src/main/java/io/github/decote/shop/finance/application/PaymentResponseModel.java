@@ -1,4 +1,4 @@
-package io.github.decote.shop.finance.application;
+package io.github.semandrics.shop.finance.application;
 
 import java.util.UUID;
 

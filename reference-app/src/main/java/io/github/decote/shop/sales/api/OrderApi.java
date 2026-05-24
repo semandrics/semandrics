@@ -1,8 +1,8 @@
-package io.github.decote.shop.sales.api;
+package io.github.semandrics.shop.sales.api;
 
-import io.github.decote.shop.sales.application.SalesService;
-import io.github.decote.shop.sales.domain.Order;
-import io.github.decote.shop.sales.domain.Result;
+import io.github.semandrics.shop.sales.application.SalesService;
+import io.github.semandrics.shop.sales.domain.Order;
+import io.github.semandrics.shop.sales.domain.Result;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,4 +1,4 @@
-package io.github.decote.shop;
+package io.github.semandrics.shop;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

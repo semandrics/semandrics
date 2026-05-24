@@ -1,4 +1,4 @@
-package io.github.decote.shop.store.application;
+package io.github.semandrics.shop.store.application;
 
 import org.springframework.stereotype.Service;
 

@@ -1,8 +1,8 @@
-package io.github.decote.shop.store.infrastructure;
+package io.github.semandrics.shop.store.infrastructure;
 
-import io.github.decote.shop.sales.domain.Result;
-import io.github.decote.shop.store.application.WarehouseSystem;
-import io.github.decote.shop.store.domain.ReservationResult;
+import io.github.semandrics.shop.sales.domain.Result;
+import io.github.semandrics.shop.store.application.WarehouseSystem;
+import io.github.semandrics.shop.store.domain.ReservationResult;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;

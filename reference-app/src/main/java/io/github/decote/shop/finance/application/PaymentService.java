@@ -1,8 +1,8 @@
-package io.github.decote.shop.finance.application;
+package io.github.semandrics.shop.finance.application;
 
-import io.github.decote.shop.finance.domain.Payment;
-import io.github.decote.shop.finance.domain.PaymentFactory;
-import io.github.decote.shop.sales.domain.Result;
+import io.github.semandrics.shop.finance.domain.Payment;
+import io.github.semandrics.shop.finance.domain.PaymentFactory;
+import io.github.semandrics.shop.sales.domain.Result;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;

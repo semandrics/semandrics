@@ -1,8 +1,8 @@
-package io.github.decote.shop.finance.infrastructure;
+package io.github.semandrics.shop.finance.infrastructure;
 
-import io.github.decote.shop.finance.application.PaymentProcessor;
-import io.github.decote.shop.finance.domain.Payment;
-import io.github.decote.shop.sales.domain.Result;
+import io.github.semandrics.shop.finance.application.PaymentProcessor;
+import io.github.semandrics.shop.finance.domain.Payment;
+import io.github.semandrics.shop.sales.domain.Result;
 import org.springframework.stereotype.Service;
 
 @Service

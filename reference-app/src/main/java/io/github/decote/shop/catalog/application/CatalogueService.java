@@ -1,8 +1,8 @@
-package io.github.decote.shop.catalog.application;
+package io.github.semandrics.shop.catalog.application;
 
-import io.github.decote.CoreEntry;
-import io.github.decote.shop.catalog.domain.Product;
-import io.github.decote.shop.catalog.domain.ProductRepository;
+import io.github.semandrics.CoreEntry;
+import io.github.semandrics.shop.catalog.domain.Product;
+import io.github.semandrics.shop.catalog.domain.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

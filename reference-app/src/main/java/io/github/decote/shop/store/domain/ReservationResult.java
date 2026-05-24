@@ -1,6 +1,6 @@
-package io.github.decote.shop.store.domain;
+package io.github.semandrics.shop.store.domain;
 
-import io.github.decote.shop.sales.domain.Result;
+import io.github.semandrics.shop.sales.domain.Result;
 import java.time.Instant;
 
 public record ReservationResult(String reservationId, Instant expiresAt) {

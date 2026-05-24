@@ -1,6 +1,6 @@
-package io.github.decote.shop.catalog.api.product;
+package io.github.semandrics.shop.catalog.api.product;
 
-import io.github.decote.shop.catalog.application.CatalogueService;
+import io.github.semandrics.shop.catalog.application.CatalogueService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

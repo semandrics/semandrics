@@ -1,0 +1,31 @@
+package io.github.semandrics.shop.sales.api;
+
+import io.github.semandrics.shop.sales.application.SalesService;
+import io.github.semandrics.shop.sales.domain.Result;
+import io.github.semandrics.shop.sales.domain.cart.Cart;
+import io.github.semandrics.shop.sales.domain.cart.CartId;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
+
+@RestController
+@RequestMapping("/cart")
+public class CartApi {
+    private final SalesService salesService;
+
+    public CartApi(SalesService salesService) {
+        this.salesService = salesService;
+    }
+
+    @PostMapping
+    public Cart createCart() {
+        return salesService.createCart();
+    }
+
+    @PostMapping("/{cartId}/items")
+    public Result<Cart> addItem(@PathVariable UUID cartId, @RequestBody CartItemRequest item) {
+        return salesService.addToCart(new CartId(cartId), item.sku(), item.quantity());
+    }
+
+    public record CartItemRequest(String sku, int quantity) {}
+}

@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Semandrics — Deterministic Core Testing</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<link rel="stylesheet" href="semandrics.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Semandrics — Deterministic Core Testing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap"
+      rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="./semandrics.css">
 </head>
 <body class="light">
 
@@ -18,8 +20,8 @@
   </a>
   <div class="nav-right">
     <button class="tab-btn active" onclick="showSection('overview', this)">Overview</button>
-    <button class="tab-btn" onclick="showSection('model', this)">Model</button>
-    <button class="tab-btn" onclick="showSection('approach', this)">Approach</button>
+    <button class="tab-btn" onclick="showSection('model', this)">The Model</button>
+    <button class="tab-btn" onclick="showSection('how-it-works', this)">How it Works</button>
     <a
         class="github-link"
         href="https://github.com/semandrics/semandrics"
@@ -43,39 +45,117 @@
     <div class="eyebrow"><i class="fa-solid fa-flask fa-xs"></i> Early research</div>
     <h1>Deterministic Core Testing<br>for <em>backend services</em></h1>
 
-    <div class="status-row">
-      <p>I am exploring ideas I find genuinely exciting. This is where I think out loud and experiment with turning those thoughts into code. Look around, give feedback, get involved.</p>
-    </div>
-
-    <p class="lead">
-      If a backend service is isolated from infrastructure and treated as a deterministic Core, something important becomes visible.
+    <p class="lead" style="padding-top: 2em;">
+      <strong>Determininistic Core Testing</strong> is an approach for modeling and testing backend services by
+      isolating business logic from infrastructure, making behavior deterministic, and reducing infinite input
+      combinations to a finite set of meaningful execution flows.
     </p>
 
-    <div class="pullquote">
+    <p class="lead" style="margin-top:-16px;">
+      <strong>Semandrics</strong> is the space to explore this approach and build tools around it.
+    </p>
+
+    <hr class="divider">
+
+    <p class="lead" style="margin-top:-16px;">
+      The concept builds on three ideas:
+    </p>
+
+    <div class="principle">
+      <div class="num">1</div>
+      <div>
+        <h3><em>Isolate the business logic</em> from infrastructure</h3>
+
+        <p>
+          Separating business logic from infrastructure concerns such as HTTP, databases, messaging, or external APIs is
+          already a well-known technique in layered architectures. Domain-Driven Design is one example of this approach.
+          In this project, the isolated business logic is called the Core.
+        </p>
+
+        <p style="margin-top:8px;">
+          The idea is simple: business logic is already difficult enough on its own. Keeping it isolated makes it easier
+          to understand, reason about, and evolve independently from infrastructure details.
+        </p>
+      </div>
+    </div>
+
+
+    <div class="principle">
+      <div class="num">2</div>
+      <div>
+
+        <h3>Make the Core deterministic</h3>
+
+        <p>
+          A deterministic Core produces the same behavior for the same input and the same responses from external
+          systems.
+        </p>
+
+        <p style="margin-top:8px;">
+          That means:
+        </p>
+        <ul>
+          <li>the same flow through the system</li>
+          <li>the same sequence of interactions with external systems</li>
+          <li>the same request data sent to those systems</li>
+          <li>and ultimately the same Result</li>
+        </ul>
+
+        <p style="margin-top:8px;">
+          Once the Core is deterministic, these behavioral flows become reproducible and analyzable.
+        </p>
+
+      </div>
+    </div>
+
+
+    <div class="principle">
+      <div class="num">3</div>
+      <div>
+        <h3>Categorize input data and response data from external systems</h3>
+
+        <p style="margin-top:8px;">
+          Not all data influences behavior equally.
+        </p>
+
+        <p style="margin-top:8px;">
+          Some values simply pass through the system without changing the execution path. Others determine which path
+          the
+          system takes.
+        </p>
+
+        <p style="margin-top:8px;">
+          Whether a shopping cart contains two books or three usually does not matter. Whether the cart is empty does.
+          Whether an inventory service confirms availability for two items or three changes nothing. The moment at least
+          one item is unavailable, the flow changes.
+        </p>
+
+        <p style="margin-top:8px;">
+          The infinite space of concrete data can therefore be reduced to a finite set of semantically distinct
+          categories
+          that influence behavior. Semandrics calls these categories Variants.
+        </p>
+
+      </div>
+    </div>
+
+    <div class="pullquote" style="margin-top:4em;">
       <p>
-        Every invocation of the system produces a specific Result. Along the way, a specific sequence of observable interactions with the outside world occurs. The flow through the Core is determined by the incoming data and by the responses returned from external systems.
+        Once Variants are identified explicitly, backend behavior becomes enumerable. Not every possible input — every
+        meaningful flow.
+      </p>
+
+      <ul>
+        <li>Tests can be generated automatically from modeled Scenarios</li>
+        <li>Complete business flows can be tested at the speed of unit tests</li>
+        <li>Coverage gaps become easier to identify</li>
+        <li>Knowledge about entry points, external systems, interactions, and Variants remains inside the codebase</li>
+      </ul>
+
+      <p>
+        This project explores whether such an approach can be applied practically in real-world enterprise systems.
       </p>
     </div>
-
-    <p class="lead" style="margin-top:-16px;">
-      But not all data influences behavior equally. Some values merely pass through the system without affecting the flow. Others cause the execution path to change.
-    </p>
-    <p class="lead" style="margin-top:-16px;">
-      Whether a shopping cart contains two books or three usually does not matter. Whether the cart is empty does. Whether an inventory service confirms availability for two items or three changes nothing. The moment at least one item is unavailable, the flow changes.
-    </p>
-
-    <div class="pullquote">
-      <p>
-        The infinite space of concrete data can therefore be reduced to a finite set of semantically distinct categories that influence behavior. Semandrics calls these categories Variants.
-      </p>
-    </div>
-
-    <p class="lead" style="margin-top:-16px;">
-      Once Variants are made explicit, backend behavior becomes enumerable. Not every possible input — every possible flow. One of the goals of Semandrics is to identify and cover all meaningful behavioral flows of a service.
-    </p>
-    <p class="lead" style="margin-top:-16px;">
-      Because the Core is detached from infrastructure, Scenarios execute as fast as unit tests. The tests themselves are generated automatically from the modeled Scenarios. But the knowledge about Entry Points, External Systems, interactions, and Variants remains inside the codebase.
-    </p>
 
     <div class="actions">
       <button class="btn-primary" onclick="showSection('model', document.querySelectorAll('.tab-btn')[1])">
@@ -89,7 +169,8 @@
           <i class="fa-solid fa-circle-half-stroke" style="color:var(--purple)"></i>
         </div>
         <h3>Deterministic Core</h3>
-        <p>A strict boundary between business logic and infrastructure. Inside: pure logic. Outside: everything that introduces non-determinism.</p>
+        <p>A strict boundary between business logic and infrastructure. Inside: pure logic. Outside: everything that
+          introduces non-determinism.</p>
       </div>
       <div class="card">
         <div class="card-icon" style="background:var(--teal-light)">
@@ -103,7 +184,8 @@
           <i class="fa-solid fa-route" style="color:var(--amber)"></i>
         </div>
         <h3>Scenario modelling</h3>
-        <p>A Scenario is a complete, named path through the Core. One Entry Point, one Variant, one sequence of external interactions, one expected Result.</p>
+        <p>A Scenario is a complete, named path through the Core. One Entry Point, one Variant, one sequence of
+          external interactions, one expected Result.</p>
       </div>
     </div>
 
@@ -113,84 +195,96 @@
     <div class="table-wrap">
       <table>
         <thead>
-          <tr>
-            <th></th>
-            <th>Unit tests</th>
-            <th>Deterministic Core Testing</th>
-            <th>E2E / integration</th>
-          </tr>
+        <tr>
+          <th></th>
+          <th>Unit tests</th>
+          <th>Deterministic Core Testing</th>
+          <th>E2E / integration</th>
+        </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>What is verified</td>
-            <td>Small units (usually classes)</td>
-            <td>Business process through the Core</td>
-            <td>System behavior with real systems</td>
-          </tr>
-          <tr>
-            <td>Refactoring impact</td>
-            <td class="heavy">High</td>
-            <td class="check">Very low</td>
-            <td class="heavy">Very high</td>
-          </tr>
-          <tr>
-            <td>No infrastructure required</td>
-            <td class="check">✓</td>
-            <td class="check">✓</td>
-            <td class="dash">—</td>
-          </tr>
-          <tr>
-            <td>Fast</td>
-            <td class="check">✓</td>
-            <td class="check">✓</td>
-            <td class="dash">—</td>
-          </tr>
-          <tr>
-            <td>Deterministic by design</td>
-            <td class="dash">—</td>
-            <td class="check">✓</td>
-            <td class="dash">—</td>
-          </tr>
-          <tr>
-            <td>Focus on business processes</td>
-            <td class="dash">—</td>
-            <td class="check">✓</td>
-            <td class="heavy">✓ (with heavy overhead)</td>
-          </tr>
-          <tr>
-            <td>Tests full service flow</td>
-            <td class="dash">—</td>
-            <td class="check">✓</td>
-            <td class="check">✓</td>
-          </tr>
-          <tr>
-            <td>Tests real integration with external systems</td>
-            <td class="dash">—</td>
-            <td class="dash">—</td>
-            <td class="check">✓</td>
-          </tr>
+        <tr>
+          <td>What is verified</td>
+          <td>Small units (usually classes)</td>
+          <td>Business process through the Core</td>
+          <td>System behavior with real systems</td>
+        </tr>
+        <tr>
+          <td>Refactoring impact</td>
+          <td class="heavy">High</td>
+          <td class="check">Very low</td>
+          <td class="heavy">Very high</td>
+        </tr>
+        <tr>
+          <td>No infrastructure required</td>
+          <td class="check">✓</td>
+          <td class="check">✓</td>
+          <td class="dash">—</td>
+        </tr>
+        <tr>
+          <td>Fast</td>
+          <td class="check">✓</td>
+          <td class="check">✓</td>
+          <td class="dash">—</td>
+        </tr>
+        <tr>
+          <td>Deterministic by design</td>
+          <td class="dash">—</td>
+          <td class="check">✓</td>
+          <td class="dash">—</td>
+        </tr>
+        <tr>
+          <td>Focus on business processes</td>
+          <td class="dash">—</td>
+          <td class="check">✓</td>
+          <td class="heavy">✓ (with heavy overhead)</td>
+        </tr>
+        <tr>
+          <td>Tests full service flow</td>
+          <td class="dash">—</td>
+          <td class="check">✓</td>
+          <td class="check">✓</td>
+        </tr>
+        <tr>
+          <td>Tests real integration with external systems</td>
+          <td class="dash">—</td>
+          <td class="dash">—</td>
+          <td class="check">✓</td>
+        </tr>
         </tbody>
       </table>
     </div>
-    <p class="prose">Deterministic Core Testing fills the gap between unit tests and end-to-end tests. It is not a replacement for either — it is the layer in between.</p>
+    <p class="prose">Deterministic Core Testing fills the gap between unit tests and end-to-end tests. It is not a
+      replacement for either — it is the layer in between.</p>
   </section>
 
   <!-- ═══════════════════ MODEL ═══════════════════ -->
   <section class="section" id="model">
     <div class="eyebrow"><i class="fa-solid fa-language fa-xs"></i> Ubiquitous language</div>
     <h1>The vocabulary of <em>Semandrics</em></h1>
-    <p class="lead">The terms in Semandrics are not arbitrary. They reflect a specific way of thinking about backend services — not as code, but as a model of behavior. Getting the vocabulary right matters, because the vocabulary shapes what you can see.</p>
+    <p class="lead">The terms in Semandrics are not arbitrary. They reflect a specific way of thinking about backend
+      services — not as code, but as a model of behavior. Getting the vocabulary right matters, because the vocabulary
+      shapes what you can see.</p>
 
-    <p class="prose">This page walks through the terms using a concrete example: a checkout service that receives a cart ID, fetches the cart, validates it, generates an order, and sends a confirmation email. Decisions happen along the way. What if the cart does not exist? What if it is empty? Each of those leads to a different path. Semandrics is interested in those paths — naming them, specifying them, and making sure none are forgotten.</p>
+    <p class="prose">This page walks through the terms using a concrete example: a checkout service that receives a cart
+      ID, fetches the cart, validates it, generates an order, and sends a confirmation email. Decisions happen along the
+      way. What if the cart does not exist? What if it is empty? Each of those leads to a different path. Semandrics is
+      interested in those paths — naming them, specifying them, and making sure none are forgotten.</p>
 
     <hr class="divider">
 
     <div class="principle">
       <div class="num">1</div>
       <div>
-        <h3>Deterministic Core <span style="font-family:var(--mono);font-size:12px;font-weight:300;color:var(--text3)">/ Core</span></h3>
-        <p>The part of the service that contains the business logic. Deterministic in a precise sense: given the same inputs and the same responses from the outside world, it always produces the same sequence of external calls and the same result. No surprises, no hidden state.</p>
-        <p style="margin-top:8px;">The Core does not touch infrastructure directly — no database calls, no clock reads, no UUID generation. All of that happens through explicit, annotated boundaries. Everything inside them is logic. Everything outside is infrastructure. This boundary is a design statement: <em>here is where the business logic lives, and everything else serves it.</em></p>
+        <h3>Deterministic Core <span style="font-family:var(--mono);font-size:12px;font-weight:300;color:var(--text3)">/ Core</span>
+        </h3>
+        <p>The part of the service that contains the business logic. Deterministic in a precise sense: given the same
+          inputs and the same responses from the outside world, it always produces the same sequence of external calls
+          and the same result. No surprises, no hidden state.</p>
+        <p style="margin-top:8px;">The Core does not touch infrastructure directly — no database calls, no clock reads,
+          no UUID generation. All of that happens through explicit, annotated boundaries. Everything inside them is
+          logic. Everything outside is infrastructure. This boundary is a design statement: <em>here is where the
+            business logic lives, and everything else serves it.</em></p>
       </div>
     </div>
 
@@ -198,22 +292,35 @@
       <div class="num">2</div>
       <div>
         <h3>Actor</h3>
-        <p>Whatever calls into the Core from the outside. In a web service, typically the HTTP layer — a controller, a request handler. The Actor is not modelled in detail. What matters is that something initiates the interaction.</p>
+        <p>Whatever calls into the Core from the outside. In a web service, typically the HTTP layer — a controller, a
+          request handler. The Actor is not modelled in detail. What matters is that something initiates the
+          interaction.</p>
       </div>
     </div>
 
     <div class="principle">
       <div class="num">3</div>
       <div>
-        <h3>Bounded Context <span style="font-family:var(--mono);font-size:11px;color:var(--text3)">PascalCase</span></h3>
-        <p>A Bounded Context is a named domain boundary — a way of carving the business into areas of distinct responsibility. Sales, Catalogue, Finance, Store — each is a world with its own language, its own rules, its own logic.</p>
-        <p style="margin-top:8px;">A good indicator that you have found a boundary: the same real-world thing is represented differently on each side of it, with a different purpose and perspective. A Product in Catalogue has variants, attributes, and descriptions — the aspects relevant to how it is presented and configured. The same Product in Store has availability and a physical location — the aspects relevant to fulfillment. In Finance it carries a price and a tax class — the aspects relevant to invoicing. It is the same thing, seen through three different lenses. Each context models only what it needs to know.</p>
-        <p style="margin-top:8px;">In Semandrics, Entry Points and Scenarios are always defined within a Bounded Context. They belong to one, and are not shared across boundaries. Same for External Systems.</p>
+        <h3>Bounded Context <span style="font-family:var(--mono);font-size:11px;color:var(--text3)">PascalCase</span>
+        </h3>
+        <p>A Bounded Context is a named domain boundary — a way of carving the business into areas of distinct
+          responsibility. Sales, Catalogue, Finance, Store — each is a world with its own language, its own rules, its
+          own logic.</p>
+        <p style="margin-top:8px;">A good indicator that you have found a boundary: the same real-world thing is
+          represented differently on each side of it, with a different purpose and perspective. A Product in Catalogue
+          has variants, attributes, and descriptions — the aspects relevant to how it is presented and configured. The
+          same Product in Store has availability and a physical location — the aspects relevant to fulfillment. In
+          Finance it carries a price and a tax class — the aspects relevant to invoicing. It is the same thing, seen
+          through three different lenses. Each context models only what it needs to know.</p>
+        <p style="margin-top:8px;">In Semandrics, Entry Points and Scenarios are always defined within a Bounded
+          Context. They belong to one, and are not shared across boundaries. Same for External Systems.</p>
         <div style="margin-top:10px;">
-          <span class="tag" style="background:var(--surface2);border:1px solid var(--border2);color:var(--text2)">Sales</span>
+          <span class="tag"
+                style="background:var(--surface2);border:1px solid var(--border2);color:var(--text2)">Sales</span>
           <span class="tag" style="background:var(--surface2);border:1px solid var(--border2);color:var(--text2)">Catalogue</span>
           <span class="tag" style="background:var(--surface2);border:1px solid var(--border2);color:var(--text2)">Finance</span>
-          <span class="tag" style="background:var(--surface2);border:1px solid var(--border2);color:var(--text2)">Store</span>
+          <span class="tag"
+                style="background:var(--surface2);border:1px solid var(--border2);color:var(--text2)">Store</span>
         </div>
       </div>
     </div>
@@ -222,7 +329,10 @@
       <div class="num">4</div>
       <div>
         <h3>Entry Point <span style="font-family:var(--mono);font-size:11px;color:var(--text3)">camelCase</span></h3>
-        <p>The annotated method through which an Actor enters the Core. Where a path begins. In the checkout example, <code style="font-family:var(--mono);font-size:12px;background:var(--surface2);border:1px solid var(--border2);padding:1px 5px;border-radius:4px;color:var(--teal)">checkout</code> is an Entry Point — it receives a cart ID and eventually produces an order or an error.</p>
+        <p>The annotated method through which an Actor enters the Core. Where a path begins. In the checkout example,
+          <code
+              style="font-family:var(--mono);font-size:12px;background:var(--surface2);border:1px solid var(--border2);padding:1px 5px;border-radius:4px;color:var(--teal)">checkout</code>
+          is an Entry Point — it receives a cart ID and eventually produces an order or an error.</p>
         <div style="margin-top:10px;">
           <span class="tag" style="background:var(--surface2);border:1px solid var(--border2);color:var(--text2)">Sales.checkout</span>
           <span class="tag" style="background:var(--surface2);border:1px solid var(--border2);color:var(--text2)">Catalogue.getProducts</span>
@@ -234,8 +344,13 @@
     <div class="principle">
       <div class="num">5</div>
       <div>
-        <h3>Input Variant <span style="font-family:var(--mono);font-size:11px;color:var(--text3)">UPPER_SNAKE_CASE</span></h3>
-        <p>A named category of input to an Entry Point that is meaningful for the flow. Variants are not about data — they are about semantics. A checkout Entry Point receives a cart ID and an optional coupon code. Whether a coupon is present changes the flow — WITH_COUPON and WITHOUT_COUPON are two Variants. The cart ID itself is just a UUID — whether the cart exists or not is a Response Variant on CartRepository.getCart, not a Variant on the Entry Point.</p>
+        <h3>Input Variant <span
+            style="font-family:var(--mono);font-size:11px;color:var(--text3)">UPPER_SNAKE_CASE</span></h3>
+        <p>A named category of input to an Entry Point that is meaningful for the flow. Variants are not about data —
+          they are about semantics. A checkout Entry Point receives a cart ID and an optional coupon code. Whether a
+          coupon is present changes the flow — WITH_COUPON and WITHOUT_COUPON are two Variants. The cart ID itself is
+          just a UUID — whether the cart exists or not is a Response Variant on CartRepository.getCart, not a Variant on
+          the Entry Point.</p>
         <p style="margin-top:8px;">Input Variants belong to a specific Entry Point and are not shared.</p>
         <div style="margin-top:10px;">
           <span class="tag" style="background:var(--surface2);border:1px solid var(--border2);color:var(--text2)">Sales.checkout.WITH_COUPON</span>
@@ -247,9 +362,16 @@
     <div class="principle">
       <div class="num">6</div>
       <div>
-        <h3>External System <span style="font-family:var(--mono);font-size:11px;color:var(--text3)">PascalCase</span></h3>
-        <p>Anything outside the Core that the Core depends on — repositories, domain services, time providers, ID generators. All of these introduce either non-determinism or infrastructure concerns, and must be controlled.</p>
-        <p style="margin-top:8px;">Part of the Semandrics approach is to name and model External Systems according to their semantic meaning in the Bounded Context — not according to their technical nature. So instead of a generic RandomIdGenerator or TimeService, you define an OrderIdGenerator and an OrderClock. The Access Points follow the same logic: not generateUUID but generateOrderId. This makes the intent explicit and separates semantic meaning from technical implementation.</p>
+        <h3>External System <span style="font-family:var(--mono);font-size:11px;color:var(--text3)">PascalCase</span>
+        </h3>
+        <p>Anything outside the Core that the Core depends on — repositories, domain services, time providers, ID
+          generators. All of these introduce either non-determinism or infrastructure concerns, and must be
+          controlled.</p>
+        <p style="margin-top:8px;">Part of the Semandrics approach is to name and model External Systems according to
+          their semantic meaning in the Bounded Context — not according to their technical nature. So instead of a
+          generic RandomIdGenerator or TimeService, you define an OrderIdGenerator and an OrderClock. The Access Points
+          follow the same logic: not generateUUID but generateOrderId. This makes the intent explicit and separates
+          semantic meaning from technical implementation.</p>
         <div style="margin-top:10px;">
           <span class="tag" style="background:var(--surface2);border:1px solid var(--border2);color:var(--text2)">CartRepository</span>
           <span class="tag" style="background:var(--surface2);border:1px solid var(--border2);color:var(--text2)">CustomerSupportMailService</span>
@@ -262,7 +384,16 @@
       <div class="num">7</div>
       <div>
         <h3>Access Point <span style="font-family:var(--mono);font-size:11px;color:var(--text3)">camelCase</span></h3>
-        <p>The annotated method the Core calls on an External System. The boundary through which the Core reaches outward. In the checkout example, <code style="font-family:var(--mono);font-size:12px;background:var(--surface2);border:1px solid var(--border2);padding:1px 5px;border-radius:4px;color:var(--teal)">getCart</code> on <code style="font-family:var(--mono);font-size:12px;background:var(--surface2);border:1px solid var(--border2);padding:1px 5px;border-radius:4px;color:var(--teal)">CartRepository</code> is an Access Point. So is <code style="font-family:var(--mono);font-size:12px;background:var(--surface2);border:1px solid var(--border2);padding:1px 5px;border-radius:4px;color:var(--teal)">sendOrderConfirmation</code> on <code style="font-family:var(--mono);font-size:12px;background:var(--surface2);border:1px solid var(--border2);padding:1px 5px;border-radius:4px;color:var(--teal)">OrderMailService</code>.</p>
+        <p>The annotated method the Core calls on an External System. The boundary through which the Core reaches
+          outward. In the checkout example, <code
+              style="font-family:var(--mono);font-size:12px;background:var(--surface2);border:1px solid var(--border2);padding:1px 5px;border-radius:4px;color:var(--teal)">getCart</code>
+          on <code
+              style="font-family:var(--mono);font-size:12px;background:var(--surface2);border:1px solid var(--border2);padding:1px 5px;border-radius:4px;color:var(--teal)">CartRepository</code>
+          is an Access Point. So is <code
+              style="font-family:var(--mono);font-size:12px;background:var(--surface2);border:1px solid var(--border2);padding:1px 5px;border-radius:4px;color:var(--teal)">sendOrderConfirmation</code>
+          on <code
+              style="font-family:var(--mono);font-size:12px;background:var(--surface2);border:1px solid var(--border2);padding:1px 5px;border-radius:4px;color:var(--teal)">OrderMailService</code>.
+        </p>
         <div style="margin-top:10px;">
           <span class="tag" style="background:var(--surface2);border:1px solid var(--border2);color:var(--text2)">CartRepository.getCart</span>
           <span class="tag" style="background:var(--surface2);border:1px solid var(--border2);color:var(--text2)">OrderMailService.sendOrderConfirmation</span>
@@ -274,7 +405,11 @@
       <div class="num">8</div>
       <div>
         <h3>Request <span style="font-family:var(--mono);font-size:11px;color:var(--text3)">UPPER_SNAKE_CASE</span></h3>
-        <p>The declared expectation of what arguments the Core should pass to an Access Point on a given path. Not chosen when composing a Scenario — produced deterministically by the Core and verified by Semandrics. If the Core is working correctly, <code style="font-family:var(--mono);font-size:12px;background:var(--surface2);border:1px solid var(--border2);padding:1px 5px;border-radius:4px;color:var(--teal)">CartRepository.getCart</code> should be called with the cart ID that came in through the Entry Point.</p>
+        <p>The declared expectation of what arguments the Core should pass to an Access Point on a given path. Not
+          chosen when composing a Scenario — produced deterministically by the Core and verified by Semandrics. If the
+          Core is working correctly, <code
+              style="font-family:var(--mono);font-size:12px;background:var(--surface2);border:1px solid var(--border2);padding:1px 5px;border-radius:4px;color:var(--teal)">CartRepository.getCart</code>
+          should be called with the cart ID that came in through the Entry Point.</p>
         <div style="margin-top:10px;">
           <span class="tag" style="background:var(--surface2);border:1px solid var(--border2);color:var(--text2)">CartRepository.getCart → CART_ID</span>
           <span class="tag" style="background:var(--surface2);border:1px solid var(--border2);color:var(--text2)">OrderIdGenerator.createOrderId → NO_DATA</span>
@@ -285,8 +420,12 @@
     <div class="principle">
       <div class="num">9</div>
       <div>
-        <h3>Response Variant <span style="font-family:var(--mono);font-size:11px;color:var(--text3)">UPPER_SNAKE_CASE</span></h3>
-        <p>A named category of response from an Access Point that is meaningful for the flow. When <code style="font-family:var(--mono);font-size:12px;background:var(--surface2);border:1px solid var(--border2);padding:1px 5px;border-radius:4px;color:var(--teal)">CartRepository.getCart</code> is called, it might return a valid cart, an empty cart, or nothing. Each leads the Core somewhere different.</p>
+        <h3>Response Variant <span
+            style="font-family:var(--mono);font-size:11px;color:var(--text3)">UPPER_SNAKE_CASE</span></h3>
+        <p>A named category of response from an Access Point that is meaningful for the flow. When <code
+            style="font-family:var(--mono);font-size:12px;background:var(--surface2);border:1px solid var(--border2);padding:1px 5px;border-radius:4px;color:var(--teal)">CartRepository.getCart</code>
+          is called, it might return a valid cart, an empty cart, or nothing. Each leads the Core somewhere different.
+        </p>
         <div style="margin-top:10px;">
           <span class="tag" style="background:var(--surface2);border:1px solid var(--border2);color:var(--text2)">CartRepository.getCart ← VALID_CART</span>
           <span class="tag" style="background:var(--surface2);border:1px solid var(--border2);color:var(--text2)">CartRepository.getCart ← EMPTY_CART</span>
@@ -300,7 +439,8 @@
       <div class="num">10</div>
       <div>
         <h3>Result <span style="font-family:var(--mono);font-size:11px;color:var(--text3)">UPPER_SNAKE_CASE</span></h3>
-        <p>The declared expected outcome of an Entry Point on a given path. Like a Request, it is not chosen — it is what the Core must produce if everything is correct.</p>
+        <p>The declared expected outcome of an Entry Point on a given path. Like a Request, it is not chosen — it is
+          what the Core must produce if everything is correct.</p>
         <div style="margin-top:10px;">
           <span class="tag" style="background:var(--surface2);border:1px solid var(--border2);color:var(--text2)">Sales.checkout → ORDER_CREATED</span>
           <span class="tag" style="background:var(--surface2);border:1px solid var(--border2);color:var(--text2)">Sales.checkout → CART_EMPTY_ERROR</span>
@@ -313,8 +453,12 @@
       <div class="num">11</div>
       <div>
         <h3>Scenario <span style="font-family:var(--mono);font-size:11px;color:var(--text3)">PascalCase</span></h3>
-        <p>A complete specification of one path through the Core. One Entry Point, one Input Variant, an ordered sequence of Access Point calls each with an expected Request and Response Variant, and the expected Result. One path, fully named and declared.</p>
-        <p style="margin-top:8px;">The order matters absolutely. A Scenario is not a bag of assertions — it is a trace. It says: <em>on this path, the Core calls getCart first with CART_ID, receives EMPTY_CART, and returns CART_EMPTY_ERROR.</em> That is the whole story of that path, written down.</p>
+        <p>A complete specification of one path through the Core. One Entry Point, one Input Variant, an ordered
+          sequence of Access Point calls each with an expected Request and Response Variant, and the expected Result.
+          One path, fully named and declared.</p>
+        <p style="margin-top:8px;">The order matters absolutely. A Scenario is not a bag of assertions — it is a trace.
+          It says: <em>on this path, the Core calls getCart first with CART_ID, receives EMPTY_CART, and returns
+            CART_EMPTY_ERROR.</em> That is the whole story of that path, written down.</p>
         <div style="margin-top:10px;">
           <span class="tag" style="background:var(--surface2);border:1px solid var(--border2);color:var(--text2)">Sales.EmptyCartCheckout</span>
           <span class="tag" style="background:var(--surface2);border:1px solid var(--border2);color:var(--text2)">Sales.SuccessfulCheckout</span>
@@ -328,48 +472,129 @@
     <div class="table-wrap">
       <table class="ref-table">
         <thead>
-          <tr><th>Concept</th><th>Term</th><th>Convention</th><th>Example</th></tr>
+        <tr>
+          <th>Concept</th>
+          <th>Term</th>
+          <th>Convention</th>
+          <th>Example</th>
+        </tr>
         </thead>
         <tbody>
-          <tr><td>Business logic, isolated from infrastructure</td><td>Deterministic Core / Core</td><td>—</td><td>—</td></tr>
-          <tr><td>Caller of an Entry Point</td><td>Actor</td><td>—</td><td>—</td></tr>
-          <tr><td>Distinct business areas</td><td>Bounded Context</td><td>PascalCase</td><td>Finance</td></tr>
-          <tr><td>Annotated method where an Actor enters the Core</td><td>Entry Point</td><td>camelCase</td><td>checkout</td></tr>
-          <tr><td>Named flow-relevant input category</td><td>Input Variant</td><td>UPPER_SNAKE_CASE</td><td>WITH_COUPON</td></tr>
-          <tr><td>Outside dependency</td><td>External System</td><td>PascalCase</td><td>CartRepository</td></tr>
-          <tr><td>Annotated method the Core calls on an External System</td><td>Access Point</td><td>camelCase</td><td>getCart</td></tr>
-          <tr><td>Declared arguments expected at an Access Point</td><td>Request</td><td>UPPER_SNAKE_CASE</td><td>CART_ID</td></tr>
-          <tr><td>Named flow-relevant response category</td><td>Response Variant</td><td>UPPER_SNAKE_CASE</td><td>CART_NOT_FOUND</td></tr>
-          <tr><td>Declared expected output of an Entry Point</td><td>Result</td><td>UPPER_SNAKE_CASE</td><td>ORDER_CREATED</td></tr>
-          <tr><td>One complete named path specification</td><td>Scenario</td><td>PascalCase</td><td>EmptyCartCheckout</td></tr>
+        <tr>
+          <td>Business logic, isolated from infrastructure</td>
+          <td>Deterministic Core / Core</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>Caller of an Entry Point</td>
+          <td>Actor</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>Distinct business areas</td>
+          <td>Bounded Context</td>
+          <td>PascalCase</td>
+          <td>Finance</td>
+        </tr>
+        <tr>
+          <td>Annotated method where an Actor enters the Core</td>
+          <td>Entry Point</td>
+          <td>camelCase</td>
+          <td>checkout</td>
+        </tr>
+        <tr>
+          <td>Named flow-relevant input category</td>
+          <td>Input Variant</td>
+          <td>UPPER_SNAKE_CASE</td>
+          <td>WITH_COUPON</td>
+        </tr>
+        <tr>
+          <td>Outside dependency</td>
+          <td>External System</td>
+          <td>PascalCase</td>
+          <td>CartRepository</td>
+        </tr>
+        <tr>
+          <td>Annotated method the Core calls on an External System</td>
+          <td>Access Point</td>
+          <td>camelCase</td>
+          <td>getCart</td>
+        </tr>
+        <tr>
+          <td>Declared arguments expected at an Access Point</td>
+          <td>Request</td>
+          <td>UPPER_SNAKE_CASE</td>
+          <td>CART_ID</td>
+        </tr>
+        <tr>
+          <td>Named flow-relevant response category</td>
+          <td>Response Variant</td>
+          <td>UPPER_SNAKE_CASE</td>
+          <td>CART_NOT_FOUND</td>
+        </tr>
+        <tr>
+          <td>Declared expected output of an Entry Point</td>
+          <td>Result</td>
+          <td>UPPER_SNAKE_CASE</td>
+          <td>ORDER_CREATED</td>
+        </tr>
+        <tr>
+          <td>One complete named path specification</td>
+          <td>Scenario</td>
+          <td>PascalCase</td>
+          <td>EmptyCartCheckout</td>
+        </tr>
         </tbody>
       </table>
     </div>
   </section>
 
-  <!-- ═══════════════════ APPROACH ═══════════════════ -->
-  <section class="section" id="approach">
+  <!-- ═══════════════════ how-it-works ═══════════════════ -->
+  <section class="section" id="how-it-works">
     <div class="eyebrow"><i class="fa-solid fa-compass-drafting fa-xs"></i> Methodology</div>
     <h1>How <em>Deterministic Core Testing</em> works</h1>
 
-    <p class="prose">Unit tests are fast and precise, but they test small things in isolation. End-to-end tests exercise real systems, but they are slow, fragile, and expensive to maintain. Neither answers the question that actually matters most: <em>have I covered the business behavior of this service?</em></p>
-    <p class="prose">Unit tests tell you the parts work. E2E tests tell you the wires are connected. Neither tells you whether the logic — the decisions, the paths, the scenarios — is fully specified and verified. Deterministic Core Testing is an attempt to work in that gap deliberately.</p>
+    <p class="prose">Unit tests are fast and precise, but they test small things in isolation. End-to-end tests exercise
+      real systems, but they are slow, fragile, and expensive to maintain. Neither answers the question that actually
+      matters most: <em>have I covered the business behavior of this service?</em></p>
+    <p class="prose">Unit tests tell you the parts work. E2E tests tell you the wires are connected. Neither tells you
+      whether the logic — the decisions, the paths, the scenarios — is fully specified and verified. Deterministic Core
+      Testing is an attempt to work in that gap deliberately.</p>
 
     <hr class="divider">
 
     <h2>Identifying Bounded Contexts</h2>
-    <p class="prose">Bounded Contexts are a concept from Domain-Driven Design. The short version: a Bounded Context is a named boundary within which a specific domain model applies. Inside that boundary, terms have precise meaning. Outside it, the same word might mean something entirely different — and that is fine, because it is a different context.</p>
-    <p class="prose">Identifying Bounded Contexts pays off in general — not just in Semandrics — because it reduces complexity. It forces the question of which things belong together, and why. The Product example in the Model page is a good test: if the same concept looks different depending on where you stand, you are probably looking at a boundary.</p>
-    <p class="prose">That said — not every service needs this step. If you are working on a focused service with a single clear domain responsibility, or if you are just getting started with Semandrics, it is perfectly reasonable to put everything into a single Bounded Context and give it a pragmatic name like <code>Default</code> or <code>Main</code>. The structure is still there, the IDs are still composable, and you can always split later when the boundaries become clear.</p>
-    <p class="prose">The concept comes from Eric Evans' <em>Domain-Driven Design</em> — the original source and still the most precise treatment of it. Beyond that, there is plenty of practical material in blogs and conference talks if you want more examples and perspectives.</p>
+    <p class="prose">Bounded Contexts are a concept from Domain-Driven Design. The short version: a Bounded Context is a
+      named boundary within which a specific domain model applies. Inside that boundary, terms have precise meaning.
+      Outside it, the same word might mean something entirely different — and that is fine, because it is a different
+      context.</p>
+    <p class="prose">Identifying Bounded Contexts pays off in general — not just in Semandrics — because it reduces
+      complexity. It forces the question of which things belong together, and why. The Product example in the Model page
+      is a good test: if the same concept looks different depending on where you stand, you are probably looking at a
+      boundary.</p>
+    <p class="prose">That said — not every service needs this step. If you are working on a focused service with a
+      single clear domain responsibility, or if you are just getting started with Semandrics, it is perfectly reasonable
+      to put everything into a single Bounded Context and give it a pragmatic name like <code>Default</code> or <code>Main</code>.
+      The structure is still there, the IDs are still composable, and you can always split later when the boundaries
+      become clear.</p>
+    <p class="prose">The concept comes from Eric Evans' <em>Domain-Driven Design</em> — the original source and still
+      the most precise treatment of it. Beyond that, there is plenty of practical material in blogs and conference talks
+      if you want more examples and perspectives.</p>
 
     <hr class="divider">
 
     <h2>Isolating the business logic</h2>
-    <p class="prose">The first move is to draw a boundary. Inside: business logic. Outside: infrastructure. Everything inside is the <strong>Deterministic Core</strong>. Given the same inputs and the same responses from External Systems, the Core always does the same thing. No surprises from the clock, no variance from the database, no randomness creeping in. All of that is pushed outside and accessed only through explicit, annotated <strong>Access Points</strong>.</p>
+    <p class="prose">The first move is to draw a boundary. Inside: business logic. Outside: infrastructure. Everything
+      inside is the <strong>Deterministic Core</strong>. Given the same inputs and the same responses from External
+      Systems, the Core always does the same thing. No surprises from the clock, no variance from the database, no
+      randomness creeping in. All of that is pushed outside and accessed only through explicit, annotated <strong>Access
+        Points</strong>.</p>
 
     <div class="pullquote">
-      <p>Drawing this boundary is a design statement as much as a testing decision. It says: <em>this is where the business logic lives, and everything else serves it.</em></p>
+      <p>Drawing this boundary is a design statement as much as a testing decision. It says: <em>this is where the
+        business logic lives, and everything else serves it.</em></p>
     </div>
 
     <p class="prose">In Java, three annotations mark the boundary:</p>
@@ -381,28 +606,62 @@
         <div class="dot" style="background:#28C840"></div>
         <span class="code-label">CheckoutService.java</span>
       </div>
-      <div class="code-body"><span class="cm">// An Entry Point — where the Actor enters the Core</span>
-<span class="ann">@EntryPoint</span>
-<span class="kw">public</span> <span class="typ">OrderResult</span> <span class="fn">checkout</span>(<span class="typ">UUID</span> cartId) {
-    <span class="cm">// business logic lives here</span>
-}
+      <div class="code-body">
 
-<span class="cm">// An External System</span>
-<span class="ann">@ExternalSystem</span>
-<span class="kw">public interface</span> <span class="typ">CartRepository</span> {
+        <span class="cm">// A class of Entry Points — all public methods are considered Entry Points.
+        // This annotation is optional. Entry Point methods can also live in classes
+        // without this annotation.</span>
+        <span class="ann">@EntryPoints</span>(boundedContext = "Sales")
+        <span class="kw">class</span> <span class="typ">SalesService</span> {
 
-    <span class="cm">// An Access Point — where the Core reaches outward</span>
-    <span class="ann">@AccessPoint</span>
-    <span class="typ">Optional</span>&lt;<span class="typ">Cart</span>&gt; <span class="fn">getCart</span>(<span class="typ">UUID</span> cartId);
-}</div>
+          <span class="cm">// This method is considered an Entry Point, because of the @EntryPoints
+          // annotation of the class, and because it is a public method.</span>
+          <span class="kw">public</span> <span class="typ">Cart</span> <span class="fn">createCart</span>() {
+            <span class="cm">// ...</span>
+          }
+
+          <span class="cm">// Same here</span>
+          <span class="kw">public</span> <span class="typ">Result&lt;Cart&gt;</span> <span class="fn">addToCart</span>(<span
+            class="typ">CartId</span> cartId, <span
+            class="typ">String</span> sku, <span
+            class="typ">int</span> quantity) {
+            <span class="cm">// ...</span>
+          }
+
+          <span class="cm">// Entry Points can be declared individually and names defined
+          // that differ from the method name.</span>
+          <span class="ann">@EntryPoint</span>(name = "placeOrder", boundedContext="Sales")
+          <span class="kw">public</span> <span class="typ">OrderResult</span> <span class="fn">checkout</span>(<span
+              class="typ">CartId</span> cartId) {
+            <span class="cm">// ...</span>
+          }
+        }
+
+        <span class="cm">// An External System — all public methods are considered Access Points.</span>
+        <span class="ann">@ExternalSystem</span>(boundedContext="Sales")
+        <span class="kw">public interface</span> <span class="typ">CartRepository</span> {
+
+          <span class="cm">// Access Points can be renamed</span>
+          <span class="ann">@AccessPoint</span>(name = "getCartById")
+          <span class="typ">Optional</span>&lt;<span class="typ">Cart</span>&gt; <span class="fn">getById</span>(<span
+              class="typ">CartId</span> cartId);
+        }
+      </div>
     </div>
 
     <hr class="divider">
 
     <h2>Thinking in Variants, not values</h2>
-    <p class="prose">Once the Core is isolated, the next question is: what inputs lead to meaningfully different behavior?</p>
-    <p class="prose">The usual approach is to write test cases with concrete data — specific cart IDs, specific prices, specific quantities. The problem is that concrete data obscures what actually drives the behavior. Two different cart IDs produce the same path if the repository returns the same kind of response for both.</p>
-    <p class="prose"><strong>Variants</strong> are the answer. A Variant is not a concrete value — it is a named semantic category. The concrete data behind each Variant is implemented in Java, but the Variant itself is a named thing that can be reasoned about, counted, and composed into Scenarios. Identifying Variants forces a useful discipline: <em>what are the genuinely different situations this service has to handle?</em> Answering that question is, in a real sense, specifying the behavioral model of the service.</p>
+    <p class="prose">Once the Core is isolated, the next question is: what inputs lead to meaningfully different
+      behavior?</p>
+    <p class="prose">The usual approach is to write test cases with concrete data — specific cart IDs, specific prices,
+      specific quantities. The problem is that concrete data obscures what actually drives the behavior. Two different
+      cart IDs produce the same path if the repository returns the same kind of response for both.</p>
+    <p class="prose">Introducing <strong>Variants</strong> is an idea to solve this issue. A Variant is not a concrete
+      value — it is a named semantic category. The concrete data behind each Variant is implemented in Java, but the
+      Variant itself is a named thing that can be reasoned about, counted, and composed into Scenarios. Identifying
+      Variants forces a useful discipline: <em>what are the genuinely different situations this service has to
+      handle?</em> Answering that question is, in a real sense, specifying the behavioral model of the service.</p>
 
     <hr class="divider">
 
@@ -415,14 +674,16 @@
           <i class="fa-brands fa-java" style="color:var(--coral)"></i>
         </div>
         <h3>Java owns everything concrete</h3>
-        <p>Entry Points, External Systems, Access Points — discovered via annotation scanning. Variants and Response Variants — implemented as named Java objects. Requests and Results — implemented as named expectations.</p>
+        <p>Entry Points, External Systems, Access Points — discovered via annotation scanning. Variants and Response
+          Variants — implemented as named Java objects. Requests and Results — implemented as named expectations.</p>
       </div>
       <div class="card">
         <div class="card-icon" style="background:var(--purple-light)">
           <i class="fa-solid fa-display" style="color:var(--purple)"></i>
         </div>
         <h3>The UI owns only Scenarios</h3>
-        <p>Named compositions of the vocabulary Java provides. The UI cannot silently break. If a Variant is removed from Java, the Scenarios that reference it fail explicitly. Java is the source of truth.</p>
+        <p>Named compositions of the vocabulary Java provides. The UI cannot silently break. If a Variant is removed
+          from Java, the Scenarios that reference it fail explicitly. Java is the source of truth.</p>
       </div>
     </div>
 
@@ -435,27 +696,30 @@
       <div class="num">1</div>
       <div>
         <h3>Correct sequence</h3>
-        <p>The Core calls the Access Points in the declared order. A Scenario is a trace, not a set of assertions — the sequence is part of the specification.</p>
+        <p>The Core calls the Access Points in the declared order. A Scenario is a trace, not a set of assertions — the
+          sequence is part of the specification.</p>
       </div>
     </div>
     <div class="principle">
       <div class="num">2</div>
       <div>
         <h3>Correct arguments</h3>
-        <p>Each Access Point receives the declared Request. The arguments the Core passes to External Systems are verifiable, not just the return values.</p>
+        <p>Each Access Point receives the declared Request. The arguments the Core passes to External Systems are
+          verifiable, not just the return values.</p>
       </div>
     </div>
     <div class="principle">
       <div class="num">3</div>
       <div>
         <h3>Correct result</h3>
-        <p>The Core returns the declared Result. No infrastructure, no slow setup, no randomness. Just the logic, exercised completely along one named path.</p>
+        <p>The Core returns the declared Result. No infrastructure, no slow setup, no randomness. Just the logic,
+          exercised completely along one named path.</p>
       </div>
     </div>
   </section>
 
 </main>
 
-<script src="semandrics.js"></script>
+<script src="./semandrics.js"></script>
 </body>
 </html>

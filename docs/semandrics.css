@@ -154,7 +154,7 @@ h2:first-child { margin-top: 0; }
     font-size: 14px; font-weight: 300; color: var(--text2);
     line-height: 1.8; max-width: 640px; margin-bottom: 20px;
 }
-.prose strong { font-weight: 500; color: var(--text); }
+strong { font-weight: 500; color: var(--text); }
 .prose code {
     font-family: var(--mono); font-size: 12px;
     background: var(--surface2); border: 1px solid var(--border2);
@@ -216,7 +216,9 @@ hr.divider { border: none; border-top: 1px solid var(--border); margin: 44px 0; 
     background: var(--purple-light);
     border-radius: 0 var(--radius-md) var(--radius-md) 0;
 }
-.pullquote p { font-size: 14px; font-weight: 300; color: var(--purple-dark); line-height: 1.75; }
+.pullquote p,
+.pullquote ul { font-size: 14px; font-weight: 300; color: var(--purple-dark); line-height: 1.75; }
+.pullquote ul { margin-top: 1em; margin-bottom: 2em; }
 body.dark .pullquote p { color: var(--purple-dark); }
 
 /* PRINCIPLES */
@@ -234,7 +236,11 @@ body.dark .pullquote p { color: var(--purple-dark); }
 }
 body.dark .num { color: var(--purple); }
 .principle h3 { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
-.principle p { font-size: 13px; font-weight: 300; color: var(--text2); line-height: 1.65; }
+.principle p,
+.principle li { font-size: 13px; font-weight: 300; color: var(--text2); line-height: 1.65; }
+
+ul { list-style-type: square; }
+li { margin-left: 2em; color: var(--text2); line-height: 1.65; font-weight: 300; }
 
 /* STEPS */
 .step {
